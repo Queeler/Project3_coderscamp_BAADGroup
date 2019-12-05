@@ -71,53 +71,53 @@ form input{
 /*
  * Header Styles
  */
-.site-header {
+.header {
   padding: 50px 0; 
 }
-.site-header .branding {
+.header .main {
   float: left; 
+  position: relative;
+  bottom: 40px;
 }
-.site-header .logo, .site-header .logo-type {
+.header .logo, .header .logo-image {
   display: inline-block;
   vertical-align: middle; 
 }
-.site-header .logo {
-  margin-right: 10px; 
-}
-.site-header .site-title {
+
+.header .title {
   margin-bottom: 5px;
   font-size: 16px;
   font-size: 1.1428571429em;
   color: white; 
 }
-.site-header .site-description {
+.header .desc{
   font-size: 10px;
   font-size: 0.7142857143em;
   display: block;
   color: #bfc1c8; 
 }
 
-.main-navigation {
+.navbar {
   float: right; 
 }
-.main-navigation .menu-toggle {
+.navbar .menu-toggle {
   display: none;
   outline: none; 
 }
-.main-navigation .menu {
+.navbar .menu {
   list-style: none; 
 }
 
 @media screen and (max-width: 990px) {
-  .main-navigation .menu {
+  .navbar .menu {
     display: none; 
   } 
 }
-.main-navigation .menu .menu-item {
+.navbar .menu .menu-item {
   float: left;
   margin-left: 10px; 
 }
-.main-navigation .menu .menu-item .menu-item a {
+.navbar .menu .menu-item .menu-item a {
   padding: 5px 15px;
   color: white;
   font-weight: 400;
@@ -126,26 +126,26 @@ form input{
 /* 
  * Enter City Styles 
 */
-.enter-name {
+.city{
   background-image: url("./images/clouds.jpg");
   background-size: cover;
   padding: 70px 0;
   min-height: 350px;
 }
 
-.find-location {
+.findCity {
   position: relative;
   margin-bottom: 70px; 
 }
 
-.find-location input[type="text"] {
+.findCity input[type="text"] {
   width: 100%;
   padding: 20px 50px 20px 20px;
   background: #1e202b;
   color: white; 
 }
 
-.find-location input[type="submit"] {
+.findCity input[type="submit"] {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -156,7 +156,7 @@ form input{
 /* 
  * BOX - section b 
 */
-.forecast-container {
+.weather-container {
   width: 100px;
   height: 150px;
   background: #323544;
@@ -169,12 +169,12 @@ form input{
 /*
  * Footer Styles
  */
-.site-footer {
+.footer {
   background: #262936;
   padding: 30px 0; 
 }
 
-.site-footer .colophon{
+.footer .copyright{
   width: 100%;
   color: white; 
 }
