@@ -1,6 +1,6 @@
 //Constants
 const APIKEY = "8ac0c51e406de21860581c6481538617";
-//Event listeners
+//On page load
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('getWeather').addEventListener('click', getWeather);
 });
