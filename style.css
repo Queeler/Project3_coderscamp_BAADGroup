@@ -1,0 +1,180 @@
+/*
+ * Global Styles
+ */
+html{
+  font-size: 14px; 
+}
+
+body{
+  color: #bfc1c8;
+  font-family: "Roboto", "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  background: #1e202b;
+  margin: 0;
+}
+
+h1{
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: normal; 
+}
+
+
+ul{
+  margin: 0;
+  padding-left: 0; 
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+li{
+  color: white;
+}
+
+p{
+  margin-top: 0; 
+}
+
+form input{
+  outline: none;
+  border: none;
+  padding: 10px;
+  border-radius: 30px; 
+}
+
+*{
+  box-sizing: border-box;
+}
+
+/*
+ * Multiple Styles
+ */
+.button, form input{
+  border: none;
+  background: #009ad8;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/*
+ * Header Styles
+ */
+.header {
+  padding: 50px 0; 
+}
+.header .main {
+  float: left; 
+  position: relative;
+  bottom: 40px;
+}
+.header .logo, .header .logo-image {
+  display: inline-block;
+  vertical-align: middle; 
+}
+
+.header .title {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-size: 1.1428571429em;
+  color: white; 
+}
+.header .desc{
+  font-size: 10px;
+  font-size: 0.7142857143em;
+  display: block;
+  color: #bfc1c8; 
+}
+
+.navbar {
+  float: right; 
+}
+.navbar .menu-toggle {
+  display: none;
+  outline: none; 
+}
+.navbar .menu {
+  list-style: none; 
+}
+
+@media screen and (max-width: 990px) {
+  .navbar .menu {
+    display: none; 
+  } 
+}
+.navbar .menu .menu-item {
+  float: left;
+  margin-left: 10px; 
+}
+.navbar .menu .menu-item .menu-item a {
+  padding: 5px 15px;
+  color: white;
+  font-weight: 400;
+}
+
+/* 
+ * Enter City Styles 
+*/
+.city{
+  background-image: url("./images/clouds.jpg");
+  background-size: cover;
+  padding: 70px 0;
+  min-height: 350px;
+}
+
+.findCity {
+  position: relative;
+  margin-bottom: 70px; 
+}
+
+.findCity input[type="text"] {
+  width: 100%;
+  padding: 20px 50px 20px 20px;
+  background: #1e202b;
+  color: white; 
+}
+
+.findCity input[type="submit"] {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  padding: 0 40px; 
+}
+
+/* 
+ * BOX - section b 
+*/
+.weather-container {
+  width: 100px;
+  height: 150px;
+  background: #323544;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: -150px;
+  margin-bottom: 50px; 
+}
+ 
+/*
+ * Footer Styles
+ */
+.footer {
+  background: #262936;
+  padding: 30px 0; 
+}
+
+.footer .copyright{
+  width: 100%;
+  color: white; 
+}
