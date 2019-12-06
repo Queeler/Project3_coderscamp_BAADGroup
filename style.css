@@ -40,13 +40,6 @@ p{
   margin-top: 0; 
 }
 
-form input{
-  outline: none;
-  border: none;
-  padding: 10px;
-  border-radius: 30px; 
-}
-
 *{
   box-sizing: border-box;
 }
@@ -54,7 +47,7 @@ form input{
 /*
  * Multiple Styles
  */
-.button, form input{
+.findCity input, button{
   border: none;
   background: #009ad8;
   padding: 10px 20px;
@@ -95,6 +88,11 @@ form input{
   font-size: 0.7142857143em;
   display: block;
   color: #bfc1c8; 
+}
+
+.mainPage{
+  position:relative;
+  height: 100vh;
 }
 
 .navbar {
@@ -145,7 +143,7 @@ form input{
   color: white; 
 }
 
-.findCity input[type="submit"] {
+.findCity button {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -171,7 +169,11 @@ form input{
  */
 .footer {
   background: #262936;
-  padding: 30px 0; 
+  padding: 30px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .footer .copyright{
