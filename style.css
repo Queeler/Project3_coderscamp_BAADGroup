@@ -136,7 +136,7 @@ p{
   margin-bottom: 70px; 
 }
 
-.findCity input[type="text"] {
+.findCity input[list="towns"] {
   width: 100%;
   padding: 20px 50px 20px 20px;
   background: #1e202b;
