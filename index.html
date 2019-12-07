@@ -31,10 +31,12 @@
 			<div class="city">
 				<div class="container">
 					<div class="findCity">
-						<input id="town" list="towns" placeholder="Enter the city name...">
-						<datalist id="towns">
-
-						</datalist>
+						<div class="autocomplete">
+							<input id="town" type="text" placeholder="Enter the city name...">
+							<div id="towns" class="autocomplete-list">
+									
+							</div>	
+						</div>
 						<button id="getWeather">Get Weather</button>
 					</div>
 				</div>
