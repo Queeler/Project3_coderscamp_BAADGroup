@@ -6,6 +6,9 @@ let citiesList;
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('getWeather').addEventListener('click', getWeather);
     document.getElementById('town').addEventListener('keyup', populateSuggestions);
+    document.body.addEventListener("click", function(){
+        document.getElementById('towns').innerHTML = '';
+    });
     getCitiesList();   
 });
 
@@ -22,7 +25,7 @@ function populateSuggestions(){
     let counter = 0;
     let output = '';
         for(var i = 0; i < citiesList.length; i++){
-            if(citiesList[i].name.substr(0, townField.length).toUpperCase() == townField.toUpperCase()){
+            if(citiesList[i].name.substr(0, townField.length).toUpperCase() === townField.toUpperCase()){
                 output += `<div onclick=\"fillTextbox(this)\"><strong>${citiesList[i].name}</strong><input type=\"hidden\" value=\"${citiesList[i].name}\"></div>`;
                 counter++;
             }
