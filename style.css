@@ -1,7 +1,7 @@
 /*
  * Global Styles
  */
-html{
+ html{
   font-size: 14px; 
 }
 
@@ -52,6 +52,26 @@ p{
   background: #009ad8;
   padding: 10px 20px;
   border-radius: 30px;
+}
+
+.outside-container{
+  display: flex;
+  justify-items: center;
+}
+
+.empty-content{
+  width: 20%;
+}
+
+.weather-container{
+  margin: 0;
+  text-align: center;
+}
+
+.weatherData, tr{
+  width: 100%;
+  border: 1px solid black;
+  text-align: left;
 }
 
 .container {
@@ -191,6 +211,11 @@ p{
   border-radius: 10px;
   margin-top: -150px;
   margin-bottom: 50px; 
+}
+
+#rememberMe {
+float: right;
+margin: 10px 20px; 
 }
  
 /*

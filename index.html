@@ -7,6 +7,7 @@
 		<title>BAAD Weather</title>
 		<link rel="stylesheet" href="style.css">
 		<script type="text/javascript" src="getWeather.js"></script>
+		
 	</head>
 	<body>
 		<div class="mainPage">
@@ -41,16 +42,31 @@
 					</div>
 				</div>
 			</div>
-				<div class="container">
-					<div class="weather-container">	
-
+			<div class="outside-container">
+					<div class="empty-content"></div>
+					<div class="weather-container">
+						<div id="rememberMe">
+								Remember my choice
+						</div>	
+						<p id="location"></p>
+						<p id="temperature"></p>
+						<p id="description"></p>
+						<table class="weatherData"><tbody id="weatherData"></tbody></table>
 					</div>
+					<div class="empty-content"></div>
 				</div>
+			<div class="container">
+				<div class = "bizarre">
+					<button id="readWeather">Read Weather</button>
+					<a href="mailto:?subject=Check%20today's%20weather!&body=Check%20the%20weather%20at%20www%2EBAADweather%2Ecom"><button>Send weather</button></a>
+				</div>
+			</div>
 			<footer class="footer">
 				<div class="container">
 					<p class="copyright">Copyright @2019 BAAD Weather. All rights reserved</p>
 				</div>
 			</footer>
-		</div>		
+		</div>
+		<script type="text/javascript" src="speechsynthesis.js"></script>		
 	</body>
 </html>
