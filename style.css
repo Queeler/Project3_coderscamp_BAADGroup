@@ -54,6 +54,26 @@ p{
   border-radius: 30px;
 }
 
+.outside-container{
+  display: flex;
+  justify-items: center;
+}
+
+.empty-content{
+  width: 20%;
+}
+
+.weather-container{
+  margin: 0;
+  text-align: center;
+}
+
+.weatherData, tr{
+  width: 100%;
+  border: 1px solid black;
+  text-align: left;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
