@@ -1,11 +1,12 @@
-const addItems = document.getElementById('getWeather');
+const gWeather = document.getElementById('getWeather');
 const townsList = document.getElementById('town');
+// const historyList = document.getElementById('displayHistory');
 const rememberMe = document.getElementById('rememberMe')
   //Check if sth is in localstorage
   const towns = JSON.parse(localStorage.getItem('towns')) || [];
 
   //Creating the history in localstorage
-  function addItem(e) {
+  function weather(e) {
     e.preventDefault(); 
     const text = (document.getElementById('town')).value;
     const town = {
@@ -15,34 +16,31 @@ const rememberMe = document.getElementById('rememberMe')
         towns.push(town);
         localStorage.setItem('towns', JSON.stringify(towns));
         populateList(towns, townsList);
-    }        
-    console.log(towns);
-
+    } 
+    console.log(towns);       
   }
   
   //Create the actual html
   
   function populateList(places = [], placeList) {
     placeList.innerHTML = places.map((place, i) => {
-      return `
-      <div>
-        <input data-index=${i} id="city${i} ${place.done ? 'checked': ''}"/>
-        <label for="city
-        ${i}">${place.text}</label>
-      </div>
-      `;
+        return `
+        <div id="city${i}">
+            ${place.text}
+        </div>
+        `;
+      
     }).join('');
   }
   function setDefault (e) {
     e.preventDefault();
     const text = (document.getElementById('town')).value;
- 
     townsList.setAttribute("placeholder", text )
 }
 
 
-  addItems.addEventListener('click', addItem);
-//  populateList(towns, townsList);
+  gWeather.addEventListener('click', weather);
+//   populateList(towns, townsList);
   rememberMe.addEventListener('click', setDefault);
   
 
