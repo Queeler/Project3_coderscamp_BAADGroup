@@ -30,7 +30,7 @@ function getWeather(){
 //            <tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>
 //            `
             document.getElementById('weatherData').innerHTML = output;
-            results.push(data.name, data.main.temp, data.main.humidity, data.main.pressure);
+            results.push(data.name, data.main.temp, data.main.pressure, data.main.humidity);
             
         });  
     document.getElementById('town').value = "";

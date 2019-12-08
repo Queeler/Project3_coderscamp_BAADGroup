@@ -200,6 +200,12 @@ p{
   padding: 0 40px; 
 }
 
+#history {
+  float: right;
+  margin: 10px 20px; 
+  color: black;
+  }
+
 /* 
  * BOX - section b 
 */
@@ -217,7 +223,11 @@ p{
 float: right;
 margin: 10px 20px; 
 }
- 
+
+
+.bizarre {
+  float: right;
+  }
 /*
  * Footer Styles
  */
