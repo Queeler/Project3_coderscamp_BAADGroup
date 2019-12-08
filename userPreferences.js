@@ -1,5 +1,6 @@
 const gWeather = document.getElementById('getWeather');
 const townsList = document.getElementById('town');
+let gl = 0;
 // const historyList = document.getElementById('displayHistory');
 const rememberMe = document.getElementById('rememberMe')
   //Check if sth is in localstorage
@@ -36,7 +37,8 @@ const rememberMe = document.getElementById('rememberMe')
   function setDefault (e) {
     e.preventDefault();
     const text = (document.getElementById('town')).value;
-    townsList.setAttribute("placeholder", text )
+    document.getElementById('town').value = text;
+    gl = 1;
 }
 
 
