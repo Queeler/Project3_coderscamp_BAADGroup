@@ -7,61 +7,35 @@
 		<title>BAAD Weather</title>
 		<link rel="stylesheet" href="style.css">
 		<script type="text/javascript" src="getWeather.js"></script>
-		
 	</head>
 	<body>
 		<div class="mainPage">
 			<div class="header">
-				<div class="container">
-					<a href="index.html" class="main">
-						<img src="images/logo1.png" alt="" class="logo">
-						<div class="logo-image">
-							<h1 class="title">BAAD Weather</h1>
-							<small class="desc">Winter is coming.</small>
-						</div>
-					</a>
-					<div class="navbar">
-						<ul class="menu">
-							<li class="menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item">Photos</li>
-							<li class="menu-item">Contact</li>
-						</ul>
+				<a href="index.html" class="main">
+					<img src="images/logo1.png" alt="" class="logo">
+					<div class="logo-image">
+						<h1 class="title">BAAD Weather</h1>
+						<small class="desc">Winter is coming.</small>
 					</div>
-				</div>
+				</a>
 			</div> 
 			<div class="city">
-				<div class="container">
-					<div class="findCity">
-						<div class="autocomplete">
-							<input id="town" type="text" placeholder = "Enter the city name..." >
-							<div id="towns" class="autocomplete-list">
-									
-							</div>
-							<div id = "displayHistory">
-								
-							</div>
-						</div>
-						<button id="getWeather">Get Weather</button>
-						<!-- <div id="history">
-							History
-						</div> -->
+				<div class="autocomplete">
+					<div id="errorText"></div>
+					<input id="town" type="text" placeholder="Enter the city name...">
+					<div id="towns" class="autocomplete-list"></div>
+					<button id="getWeather">Get Weather</button>
+					<button id="getForecast">Get Forecast</button>
+					<div id = "displayHistory">
+							
 					</div>
+				</div>
+				<div class="outside-container">
+					<div class="empty-content"></div>
+					<div id="weather-container"><button id="rememberMe">Remember my choice</button></div>
+					<div class="empty-content"></div>
 				</div>
 			</div>
-			<div class="outside-container">
-					<div class="empty-content"></div>
-					<div class="weather-container">
-						<button id="rememberMe">
-							Remember my choice
-						</button>
-							
-						<p id="location"></p>
-						<p id="temperature"></p>
-						<p id="description"></p>
-						<table class="weatherData"><tbody id="weatherData"></tbody></table>
-					</div>
-					<div class="empty-content"></div>
-				</div>
 			<div class="container">
 				<div class = "bizarre">
 					<button id="readWeather">Read Weather</button>
@@ -69,12 +43,10 @@
 				</div>
 			</div>
 			<footer class="footer">
-				<div class="container">
-					<p class="copyright">Copyright @2019 BAAD Weather. All rights reserved</p>
-				</div>
-			</footer>
-		</div>
+				<p class="copyright">Copyright &copy; 2019 BAAD Weather | Contributors: <a href="https://github.com/Queeler/Project3_coderscamp_BAADGroup">Beniamin Abramowicz, Aleksandra Łysik, Angelika Rykowska, Dominik</a></p>
+			</footer>		
+		</div>		
 		<script type="text/javascript" src="speechsynthesis.js"></script>	
-		<script type="text/javascript" src="userPreferences.js"></script>	
+		<script type="text/javascript" src="userPreferences.js"></script>
 	</body>
 </html>
