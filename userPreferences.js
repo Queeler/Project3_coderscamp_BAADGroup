@@ -19,10 +19,9 @@ const rememberMe = document.getElementById('rememberMe')
     } 
     console.log(towns);       
   }
-  
-  //Create the actual html
-  
-  function populateList(places = [], placeList) {
+ 
+  //Creating HTML elements
+    function populateList(places = [], placeList) {
     placeList.innerHTML = places.map((place, i) => {
         return `
         <div id="city${i}">
@@ -32,6 +31,8 @@ const rememberMe = document.getElementById('rememberMe')
       
     }).join('');
   }
+
+  //User Preferences saving
   function setDefault (e) {
     e.preventDefault();
     const text = (document.getElementById('town')).value;
