@@ -2,6 +2,7 @@
 const APIKEY = "8ac0c51e406de21860581c6481538617";
 //On page load
 let citiesList;
+let countryCodes;
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('getWeather').addEventListener('click', getWeather);
@@ -9,7 +10,8 @@ document.addEventListener("DOMContentLoaded", function(){
     document.body.addEventListener("click", function(){
         document.getElementById('towns').innerHTML = '';
     });
-    getCitiesList();    
+    getCitiesList(); 
+    getCodesList();
 });
 
 function getWeather(event){
@@ -20,7 +22,8 @@ function getWeather(event){
     .then((res) => res.json())
     .then((data) => { 
             console.log(data);
-            document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + data.sys.country + "</strong>";
+            document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
+            
             document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
             document.getElementById('description').innerHTML = "<strong> " + data.weather[0].description + "</strong>"
             output = `<tr><td>Wind</td><td>${data.wind.speed} m/s</td></tr>
@@ -61,7 +64,22 @@ async function fetchCities(){
     return data;
 }
 
+async function fetchCodes(){
+    let response = await fetch('countryCodes.json');
+    let data = response.json();
+    return data;
+}
+
 async function getCitiesList(){
     let dataset = await fetchCities();
     citiesList = dataset;
+}
+
+async function getCodesList(){
+    let dataset = await fetchCodes();
+    countryCodes = dataset;
+}
+
+function searchCode(fetchedCode){
+    return countryCodes[fetchedCode];
 }
