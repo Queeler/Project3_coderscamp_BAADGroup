@@ -184,6 +184,7 @@ p{
   flex-direction: column;
   min-width: 280px;
   align-items: center;
+  justify-content: center;
   text-align: center;
   height: auto;
   visibility: hidden;
@@ -206,6 +207,26 @@ p{
 
 td a{
   color: rgb(140, 140, 255);
+}
+
+#location{
+  margin-bottom: 0.5rem;
+}
+
+#temperature{
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+}
+
+#temperature img{
+  width: 3rem;
+  height: auto;
+}
+
+#temperature strong{
+  align-self: center;
 }
  
 /*

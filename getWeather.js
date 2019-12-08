@@ -23,7 +23,7 @@ function getWeather(event){
     .then((data) => { 
             console.log(data);
             document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
-            document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
+            document.getElementById('temperature').innerHTML = `<img src="images/${data.weather[0].icon}.png"> <strong>${data.main.temp} °C</strong>`;
             document.getElementById('description').innerHTML = "<strong> " + (data.weather[0].description).charAt(0).toUpperCase() + data.weather[0].description.substr(1, data.weather[0].description.length) + "</strong>";
             let windDirection = "";
             let sunriseUnix = new Date(data.sys.sunrise*1000);
