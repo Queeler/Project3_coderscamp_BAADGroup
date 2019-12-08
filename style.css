@@ -142,7 +142,7 @@ p{
 
 .autocomplete input[type="text"] {
   position: absolute;
-  top: 3.5rem;
+  top: 3rem;
   width: 100%;
   background: #1e202b;
   color: white; 
@@ -151,7 +151,7 @@ p{
 
 .autocomplete #getWeather {
   position: absolute;
-  top: 3.7rem;
+  top: 3.2rem;
   right: 0.2rem;
   bottom: 5px;
   padding: 0 40px;
@@ -160,7 +160,7 @@ p{
 
 .autocomplete #getForecast {
   position: absolute;
-  top: 3.7rem;
+  top: 3.2rem;
   right: 12rem;
   bottom: 5px;
   padding: 0 40px;
@@ -185,7 +185,7 @@ p{
   display: flex;
   justify-items: center;
   position: absolute;
-  top: 10rem;
+  top: 9rem;
   right: 0;
   left: 0;
 }
@@ -220,7 +220,7 @@ p{
 
 #weatherData{
   border-collapse: collapse;
-  width: 50%;
+  width: 60%;
 }
 
 #weatherData, td{

@@ -3,9 +3,11 @@ const APIKEY = "8ac0c51e406de21860581c6481538617";
 //On page load
 let citiesList;
 let countryCodes;
+let f;
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('getWeather').addEventListener('click', getWeather);
+    document.getElementById('getForecast').addEventListener('click', getForecast);
     document.getElementById('town').addEventListener('keyup', populateSuggestions);
     document.body.addEventListener("click", function(){
         document.getElementById('towns').innerHTML = '';
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function getWeather(event){
     event.preventDefault();
     let townField = document.getElementById('town').value;
-    let output = '';
+    let weatherOutput = '';
     fetch('https://api.openweathermap.org/data/2.5/weather?APPID=' + APIKEY + '&units=metric&q=' + townField)
     .then((res) => {
         if(!res.ok){
@@ -27,9 +29,9 @@ function getWeather(event){
     })
     .then((data) => { 
             console.log(data);
-            document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
-            document.getElementById('temperature').innerHTML = `<img src="images/${data.weather[0].icon}.png"> <strong>${data.main.temp} °C</strong>`;
-            document.getElementById('description').innerHTML = "<strong> " + (data.weather[0].description).charAt(0).toUpperCase() + data.weather[0].description.substr(1, data.weather[0].description.length) + "</strong>";
+            weatherOutput = `<p id="location"><strong>Weather in ${data.name}, ${searchCode(data.sys.country)}</strong></p>`
+            weatherOutput += `<p id="temperature"><img src="images/${data.weather[0].icon}.png"> <strong>${data.main.temp} °C</strong></p>`
+            weatherOutput += `<p id="description"><strong>${(data.weather[0].description).charAt(0).toUpperCase()}${data.weather[0].description.substr(1, data.weather[0].description.length)}</strong></p>`
             let windDirection = "";
             let sunriseUnix = new Date(data.sys.sunrise*1000);
             let sunsetUnix = new Date(data.sys.sunset*1000);
@@ -50,7 +52,7 @@ function getWeather(event){
             } else if(data.wind.deg >= 281 && data.wind.deg < 348){
                 windDirection = "North-west (" + data.wind.deg + ")"; 
             }
-            output = `<tr><td>Wind</td><td>${data.wind.speed} m/s, ${windDirection}</td></tr>
+            weatherOutput += `<table id="weatherData"><tbody><tr><td>Wind</td><td>${data.wind.speed} m/s, ${windDirection}</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
             <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
             <tr><td>Geo coords</td><td><a href="https://google.com/maps/search/${data.coord.lat},${data.coord.lon}" target="_blank">[${data.coord.lat}, ${data.coord.lon}]</a></td></tr>
@@ -58,14 +60,93 @@ function getWeather(event){
             <tr><td>Sunset</td><td>${sunsetUnix.getHours()}:${sunsetUnix.getMinutes()}</td></tr>
             `
             if(data.hasOwnProperty("rain")){
-                output += `<tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>`
+                if(data.rain.hasOwnProperty("1h")){
+                    weatherOutput += `<tr><td>Rain</td><td>${data.rain["1h"]} mm</td></tr>`
+                } else{
+                    weatherOutput += `<tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>`
+                }
             }
-            document.getElementById('weatherData').innerHTML = output;
+            weatherOutput += `</tbody></table>`;
+            document.getElementById('weather-container').innerHTML = weatherOutput;
             document.getElementById('weather-container').style.visibility = "visible";
-        }).catch(() => {
+        })
+        .catch(() => {
             document.getElementById('errorText').innerHTML = "The city you entered does not exist in data base";
         });  
+    document.getElementById('town').value = "";        
+}
+
+function getForecast(event){
+    event.preventDefault();
+    let townField = document.getElementById('town').value;
+    let forecastOutput = '';
+    fetch('https://api.openweathermap.org/data/2.5/forecast?APPID=' + APIKEY + '&units=metric&q=' + townField)
+    .then((res) => {
+        if(!res.ok){
+            throw Error(res.statusText);
+        }
+        return res.json();
+    })
+    .then((data) => {
+        forecastOutput = `<div id="selectDiv"><select id="selectDay"><option disabled hidden value="${townField}"></option>`
+        for(let i = 0; i < data.list.length; i += 2){
+            forecastOutput += `<option value="${data.list[i].dt_txt}">${data.list[i].dt_txt}</option>`;
+        }
+        forecastOutput += `</select> <button id="selectForecast" onclick="selectForecast()">choose</button></div>`;
+        document.getElementById('weather-container').innerHTML = forecastOutput;
+        document.getElementById('weather-container').style.visibility = "visible";
+        f = data.list;
+    })
+    .catch((err) => {
+        console.log(err);
+        document.getElementById('errorText').innerHTML = "The city you entered does not exist in data base";
+    });
     document.getElementById('town').value = "";
+}
+
+function selectForecast(){
+    let choosenOption = document.getElementById('selectDay').value;
+    let disabledOption = document.getElementById('selectDay').options[0].value;
+    let selectDiv = document.getElementById('selectDiv').innerHTML;
+    let select = `<div id="selectDiv">${selectDiv}</div>`;
+    f.forEach((forecast) => {
+        if(forecast.dt_txt === choosenOption){
+            select += `<p id="location"><strong>Weather in ${disabledOption}</strong></p>`
+            select += `<p id="temperature"><img src="images/${forecast.weather[0].icon}.png"> <strong>${forecast.main.temp} °C</strong></p>`
+            select += `<p id="description"><strong>${(forecast.weather[0].description).charAt(0).toUpperCase()}${forecast.weather[0].description.substr(1, forecast.weather[0].description.length)}</strong></p>`
+            let windDirection = "";
+            if(forecast.wind.deg >= 348 || forecast.wind.deg < 11){
+                windDirection = "North (" + forecast.wind.deg + ")";
+            } else if(forecast.wind.deg >= 11 && forecast.wind.deg < 78){
+                windDirection = "North-east (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 78 && forecast.wind.deg < 101){
+                windDirection = "East (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 101 && forecast.wind.deg < 168){
+                windDirection = "South-east (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 168 && forecast.wind.deg < 191){
+                windDirection = "South (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 191 && forecast.wind.deg < 258){
+                windDirection = "South-west (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 258 && forecast.wind.deg < 281){
+                windDirection = "West (" + forecast.wind.deg + ")"; 
+            } else if(forecast.wind.deg >= 281 && forecast.wind.deg < 348){
+                windDirection = "North-west (" + forecast.wind.deg + ")"; 
+            }
+            select += `<table id="weatherData"><tbody><tr><td>Wind</td><td>${forecast.wind.speed} m/s, ${windDirection}</td></tr>
+            <tr><td>Humidity</td><td>${forecast.main.humidity} %</td></tr>
+            <tr><td>Pressure</td><td>${forecast.main.pressure} hpa</td></tr>`
+            if(forecast.hasOwnProperty("rain")){
+                if(forecast.rain.hasOwnProperty("1h")){
+                    select += `<tr><td>Rain</td><td>${forecast.rain["1h"]} mm</td></tr>`
+                } else{
+                    select += `<tr><td>Rain</td><td>${forecast.rain["3h"]} mm</td></tr>`
+                }
+            }
+            select += `</tbody></table>`;
+            document.getElementById('weather-container').innerHTML = select;
+            document.getElementById('weather-container').style.visibility = "visible";
+        }
+    });
 }
 
 function populateSuggestions(){
