@@ -19,8 +19,9 @@ document.addEventListener("DOMContentLoaded", function(){
 function getWeather(event){
     event.preventDefault();
     let townField = document.getElementById('town').value;
+    let arr = townField.split('|');
     let weatherOutput = '';
-    fetch('https://api.openweathermap.org/data/2.5/weather?APPID=' + APIKEY + '&units=metric&q=' + townField)
+    fetch('https://api.openweathermap.org/data/2.5/weather?APPID=' + APIKEY + '&units=metric&q=' + arr[0] +',' + arr[1])
     .then((res) => {
         if(!res.ok){
             throw Error(res.statusText);
@@ -28,7 +29,6 @@ function getWeather(event){
         return res.json();
     })
     .then((data) => { 
-            console.log(data);
             weatherOutput = `<p id="location"><strong>Weather in ${data.name}, ${searchCode(data.sys.country)}</strong></p>`
             weatherOutput += `<p id="temperature"><img src="images/${data.weather[0].icon}.png"> <strong>${data.main.temp} °C</strong></p>`
             weatherOutput += `<p id="description"><strong>${(data.weather[0].description).charAt(0).toUpperCase()}${data.weather[0].description.substr(1, data.weather[0].description.length)}</strong></p>`
@@ -79,8 +79,9 @@ function getWeather(event){
 function getForecast(event){
     event.preventDefault();
     let townField = document.getElementById('town').value;
+    let arr = townField.split('|');
     let forecastOutput = '';
-    fetch('https://api.openweathermap.org/data/2.5/forecast?APPID=' + APIKEY + '&units=metric&q=' + townField)
+    fetch('https://api.openweathermap.org/data/2.5/forecast?APPID=' + APIKEY + '&units=metric&q=' + arr[0] + ',' + arr[1])
     .then((res) => {
         if(!res.ok){
             throw Error(res.statusText);
@@ -88,7 +89,7 @@ function getForecast(event){
         return res.json();
     })
     .then((data) => {
-        forecastOutput = `<div id="selectDiv"><select id="selectDay"><option disabled hidden value="${townField}"></option>`
+        forecastOutput = `<div id="selectDiv"><select id="selectDay"><option disabled hidden value="${arr[0]}"></option><option disabled hidden value="${arr[1]}"></option>`
         for(let i = 0; i < data.list.length; i += 2){
             forecastOutput += `<option value="${data.list[i].dt_txt}">${data.list[i].dt_txt}</option>`;
         }
@@ -106,12 +107,13 @@ function getForecast(event){
 
 function selectForecast(){
     let choosenOption = document.getElementById('selectDay').value;
-    let disabledOption = document.getElementById('selectDay').options[0].value;
+    let disabledOption1 = document.getElementById('selectDay').options[0].value;
+    let disabledOption2 = document.getElementById('selectDay').options[1].value;
     let selectDiv = document.getElementById('selectDiv').innerHTML;
     let select = `<div id="selectDiv">${selectDiv}</div>`;
     f.forEach((forecast) => {
         if(forecast.dt_txt === choosenOption){
-            select += `<p id="location"><strong>Weather in ${disabledOption}</strong></p>`
+            select += `<p id="location"><strong>Weather in ${disabledOption1}, ${disabledOption2}</strong></p>`
             select += `<p id="temperature"><img src="images/${forecast.weather[0].icon}.png"> <strong>${forecast.main.temp} °C</strong></p>`
             select += `<p id="description"><strong>${(forecast.weather[0].description).charAt(0).toUpperCase()}${forecast.weather[0].description.substr(1, forecast.weather[0].description.length)}</strong></p>`
             let windDirection = "";
@@ -155,8 +157,8 @@ function populateSuggestions(){
     let counter = 0;
     let output = '';
         for(var i = 0; i < citiesList.length; i++){
-            if(citiesList[i].name.substr(0, townField.length).toUpperCase() === townField.toUpperCase() && townField.length > 0 && !output.includes(citiesList[i].name)){
-                output += `<div onclick=\"fillTextbox(this)\"><strong>${citiesList[i].name}</strong><input type=\"hidden\" value=\"${citiesList[i].name}\"></div>`;
+            if(citiesList[i].name.substr(0, townField.length).toUpperCase() === townField.toUpperCase() && townField.length > 0){
+                output += `<div onclick="fillTextbox(this)"><strong>${citiesList[i].name} | ${searchCode(citiesList[i].country)} </strong><input type="hidden" value="${citiesList[i].name}"><input type="hidden" value="${citiesList[i].country}"><input type="hidden" value="${citiesList[i].id}"></div>`;
                 counter++;
             }
             if(counter === 14){
@@ -167,7 +169,7 @@ function populateSuggestions(){
 }
 
 function fillTextbox(el){
-    document.getElementById('town').value = el.getElementsByTagName('input')[0].value;
+    document.getElementById('town').value = el.getElementsByTagName('input')[0].value + "|" + searchCode(el.getElementsByTagName('input')[1].value);
     document.getElementById('towns').innerHTML = '';
 }
 
