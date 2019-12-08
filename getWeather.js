@@ -23,13 +23,15 @@ function getWeather(event){
     .then((data) => { 
             console.log(data);
             document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
-            
             document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
             document.getElementById('description').innerHTML = "<strong> " + data.weather[0].description + "</strong>"
             output = `<tr><td>Wind</td><td>${data.wind.speed} m/s</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
             <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
             `
+            if(data.hasOwnProperty("rain")){
+                output += `<tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>`
+            }
             document.getElementById('weatherData').innerHTML = output;
             document.getElementById('weather-container').style.visibility = "visible";
         });  

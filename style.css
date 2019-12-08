@@ -166,8 +166,21 @@ p{
   left: 0;
 }
 
+#weather-container p:first-child{
+  font-size: 2rem;
+} 
+
+#weather-container p:nth-child(2){
+  font-size: 1.5rem;
+} 
+
+#weather-container p:nth-child(3){
+  font-size: 1.2rem;
+} 
+
 #weather-container {
   display: flex;
+  color: white;
   flex-direction: column;
   align-items: center;
   height: auto;
@@ -176,6 +189,17 @@ p{
   background: #323544;
   width: 100%;
   border-radius: 10px;
+}
+
+#weatherData{
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#weatherData, td{
+  border: 2px solid black;
+  font-size: 1.3rem;
+  padding: 8px;
 }
  
 /*
