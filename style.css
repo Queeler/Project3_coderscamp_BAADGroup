@@ -72,12 +72,14 @@ p{
   position: relative;
   height: 10vh; 
 }
+
 .header .main {
   float: left; 
   height: inherit;
   position: absolute;
   top: 0;
 }
+
 .header .logo, .header .logo-image {
   display: inline-block;
   vertical-align: middle; 
@@ -138,6 +140,21 @@ p{
 
 .autocomplete-list div:hover{
   background-color: #e9e9e9;
+}
+
+#history {
+  float: right;
+  margin: 10px 20px; 
+  color: black;
+}
+
+#rememberMe {
+  float: right;
+  margin: 10px 20px; 
+}
+  
+.bizarre {
+  float: right;
 }
 
 .autocomplete input[type="text"] {

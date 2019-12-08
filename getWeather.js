@@ -2,6 +2,7 @@
 const APIKEY = "8ac0c51e406de21860581c6481538617";
 //On page load
 let citiesList;
+let results;
 let countryCodes;
 let f;
 
@@ -29,6 +30,7 @@ function getWeather(event){
         return res.json();
     })
     .then((data) => { 
+            results = [];
             weatherOutput = `<p id="location"><strong>Weather in ${data.name}, ${searchCode(data.sys.country)}</strong></p>`
             weatherOutput += `<p id="temperature"><img src="images/${data.weather[0].icon}.png"> <strong>${data.main.temp} °C</strong></p>`
             weatherOutput += `<p id="description"><strong>${(data.weather[0].description).charAt(0).toUpperCase()}${data.weather[0].description.substr(1, data.weather[0].description.length)}</strong></p>`
@@ -69,11 +71,13 @@ function getWeather(event){
             weatherOutput += `</tbody></table>`;
             document.getElementById('weather-container').innerHTML = weatherOutput;
             document.getElementById('weather-container').style.visibility = "visible";
+            results.push(data.name, data.main.temp, data.main.pressure, data.main.humidity);
         })
         .catch(() => {
             document.getElementById('errorText').innerHTML = "The city you entered does not exist in data base";
         });  
-    document.getElementById('town').value = "";        
+    document.getElementById('town').value = "";  
+    return results;      
 }
 
 function getForecast(event){
