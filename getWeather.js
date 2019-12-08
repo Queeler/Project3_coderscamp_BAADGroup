@@ -26,6 +26,8 @@ function getWeather(event){
             document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
             document.getElementById('description').innerHTML = "<strong> " + (data.weather[0].description).charAt(0).toUpperCase() + data.weather[0].description.substr(1, data.weather[0].description.length) + "</strong>";
             let windDirection = "";
+            let sunriseUnix = new Date(data.sys.sunrise*1000);
+            let sunsetUnix = new Date(data.sys.sunset*1000);
             if(data.wind.deg >= 348 || data.wind.deg < 11){
                 windDirection = "North (" + data.wind.deg + ")";
             } else if(data.wind.deg >= 11 && data.wind.deg < 78){
@@ -46,6 +48,9 @@ function getWeather(event){
             output = `<tr><td>Wind</td><td>${data.wind.speed} m/s, ${windDirection}</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
             <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
+            <tr><td>Geo coords</td><td><a href="https://google.com/maps/search/${data.coord.lat},${data.coord.lon}" target="_blank">[${data.coord.lat}, ${data.coord.lon}]</a></td></tr>
+            <tr><td>Sunrise</td><td>${sunriseUnix.getHours()}:${sunriseUnix.getMinutes()}</td></tr>
+            <tr><td>Sunset</td><td>${sunsetUnix.getHours()}:${sunsetUnix.getMinutes()}</td></tr>
             `
             if(data.hasOwnProperty("rain")){
                 output += `<tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>`

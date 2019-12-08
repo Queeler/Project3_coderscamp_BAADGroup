@@ -137,7 +137,7 @@ p{
 
 .autocomplete input[type="text"] {
   position: absolute;
-  top: 3.8rem;
+  top: 3.5rem;
   width: 100%;
   background: #1e202b;
   color: white; 
@@ -146,7 +146,7 @@ p{
 
 .autocomplete button {
   position: absolute;
-  top: 4rem;
+  top: 3.7rem;
   right: 0.2rem;
   bottom: 5px;
   padding: 0 40px;
@@ -161,7 +161,7 @@ p{
   display: flex;
   justify-items: center;
   position: absolute;
-  top: 12rem;
+  top: 10rem;
   right: 0;
   left: 0;
 }
@@ -182,7 +182,9 @@ p{
   display: flex;
   color: white;
   flex-direction: column;
+  min-width: 280px;
   align-items: center;
+  text-align: center;
   height: auto;
   visibility: hidden;
   min-height: 15rem;
@@ -200,6 +202,10 @@ p{
   border: 2px solid black;
   font-size: 1.3rem;
   padding: 8px;
+}
+
+td a{
+  color: rgb(140, 140, 255);
 }
  
 /*
