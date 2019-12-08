@@ -19,7 +19,12 @@ function getWeather(event){
     let townField = document.getElementById('town').value;
     let output = '';
     fetch('https://api.openweathermap.org/data/2.5/weather?APPID=' + APIKEY + '&units=metric&q=' + townField)
-    .then((res) => res.json())
+    .then((res) => {
+        if(!res.ok){
+            throw Error(res.statusText);
+        }
+        return res.json();
+    })
     .then((data) => { 
             console.log(data);
             document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
@@ -57,6 +62,8 @@ function getWeather(event){
             }
             document.getElementById('weatherData').innerHTML = output;
             document.getElementById('weather-container').style.visibility = "visible";
+        }).catch(() => {
+            document.getElementById('errorText').innerHTML = "The city you entered does not exist in data base";
         });  
     document.getElementById('town').value = "";
 }
