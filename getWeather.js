@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
     getCitiesList();    
 });
 
-function getWeather(){
+function getWeather(event){
+    event.preventDefault();
     let townField = document.getElementById('town').value;
     let output = '';
     fetch('https://api.openweathermap.org/data/2.5/weather?APPID=' + APIKEY + '&units=metric&q=' + townField)
@@ -25,9 +26,9 @@ function getWeather(){
             output = `<tr><td>Wind</td><td>${data.wind.speed} m/s</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
             <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
-            <tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>
             `
             document.getElementById('weatherData').innerHTML = output;
+            document.getElementById('weather-container').style.visibility = "visible";
         });  
     document.getElementById('town').value = "";
 }
