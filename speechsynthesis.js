@@ -1,12 +1,15 @@
 //Speech synthesis - actual weather conditions
-
+let Data;
 const speakButton = document.querySelector('#readWeather');
 function toggle (){
+  Data = getWeather();
   const msg = new SpeechSynthesisUtterance();
   msg.lang = 'en-US'
-  msg.text = `Weather for today for the city of CITY. At present the temperature is DEGREES °C and the pressure is PRESSURE hektopascals. The air humidity is HUMIDITY percent. Today's minimum temperature is MINIMUM °C and the maximum temperature is MAXIMUM °C.`;
-  
+  msg.text = `Weather for today for the city of ${Data[0]}. The temperature is ${Data[1]} °C and the pressure is ${Data[2]} hektopascals. The air humidity is ${Data[3]} percent.`;
+  console.log(Data);
   speechSynthesis.speak(msg);
+  
+
 }
 
 speakButton.addEventListener('click', toggle);

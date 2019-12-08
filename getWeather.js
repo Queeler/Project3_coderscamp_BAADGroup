@@ -2,6 +2,7 @@
 const APIKEY = "8ac0c51e406de21860581c6481538617";
 //On page load
 let citiesList;
+let results;
 
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById('getWeather').addEventListener('click', getWeather);
@@ -19,17 +20,23 @@ function getWeather(){
     .then((res) => res.json())
     .then((data) => { 
             console.log(data);
+            results = []
             document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + data.sys.country + "</strong>";
             document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
             document.getElementById('description').innerHTML = "<strong> " + data.weather[0].description + "</strong>"
             output = `<tr><td>Wind</td><td>${data.wind.speed} m/s</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
-            <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
-            <tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>
-            `
+            <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>`
+//            <tr><td>Rain</td><td>${data.rain["3h"]} mm</td></tr>
+//            `
             document.getElementById('weatherData').innerHTML = output;
+            results.push(data.name, data.main.temp, data.main.humidity, data.main.pressure);
+            
         });  
     document.getElementById('town').value = "";
+    
+    return results
+
 }
 
 function populateSuggestions(){
