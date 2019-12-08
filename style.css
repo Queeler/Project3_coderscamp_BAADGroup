@@ -150,11 +150,8 @@ p{
 
 #rememberMe {
   float: right;
-  margin: 10px 20px; 
-}
-  
-.bizarre {
-  float: right;
+  margin-top: 2rem;
+  margin-right: 2rem;
 }
 
 .autocomplete input[type="text"] {
@@ -244,6 +241,14 @@ p{
   border: 2px solid black;
   font-size: 1.3rem;
   padding: 8px;
+}
+
+.container{
+  position: absolute;
+  bottom: 5.2rem;
+  left: 32%;
+  right: 32%;
+  width: auto;
 }
 
 td a{
