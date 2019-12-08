@@ -24,8 +24,26 @@ function getWeather(event){
             console.log(data);
             document.getElementById('location').innerHTML = "<strong>Weather in " + data.name + ", " + searchCode(data.sys.country) + "</strong>";
             document.getElementById('temperature').innerHTML = "<strong> " + data.main.temp + " °C</strong>";
-            document.getElementById('description').innerHTML = "<strong> " + data.weather[0].description + "</strong>"
-            output = `<tr><td>Wind</td><td>${data.wind.speed} m/s</td></tr>
+            document.getElementById('description').innerHTML = "<strong> " + (data.weather[0].description).charAt(0).toUpperCase() + data.weather[0].description.substr(1, data.weather[0].description.length) + "</strong>";
+            let windDirection = "";
+            if(data.wind.deg >= 348 || data.wind.deg < 11){
+                windDirection = "North (" + data.wind.deg + ")";
+            } else if(data.wind.deg >= 11 && data.wind.deg < 78){
+                windDirection = "North-east (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 78 && data.wind.deg < 101){
+                windDirection = "East (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 101 && data.wind.deg < 168){
+                windDirection = "South-east (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 168 && data.wind.deg < 191){
+                windDirection = "South (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 191 && data.wind.deg < 258){
+                windDirection = "South-west (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 258 && data.wind.deg < 281){
+                windDirection = "West (" + data.wind.deg + ")"; 
+            } else if(data.wind.deg >= 281 && data.wind.deg < 348){
+                windDirection = "North-west (" + data.wind.deg + ")"; 
+            }
+            output = `<tr><td>Wind</td><td>${data.wind.speed} m/s, ${windDirection}</td></tr>
             <tr><td>Humidity</td><td>${data.main.humidity} %</td></tr>
             <tr><td>Pressure</td><td>${data.main.pressure} hpa</td></tr>
             `
